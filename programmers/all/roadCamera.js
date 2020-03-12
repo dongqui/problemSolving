@@ -1,7 +1,7 @@
 function solution(routes) {
   routes.sort((a, b) => a[1] - b[1]);
   let e = -Infinity, cnt = 0;
-  console.log(routes)
+
   for(let i = 0; i < routes.length; i++) {
       if(routes[i][0] > e) {
           cnt++;
