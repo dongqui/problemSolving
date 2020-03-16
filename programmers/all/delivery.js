@@ -1,4 +1,33 @@
+function solution(N, road, K) {
+    const distance = new Array(N + 1).fill(Infinity);
+    distance[1] = 0;
+    
+    const adjacent = [new Array(N + 1).fill(0)];
+    for (let i = 0; i < N; i++) {
+        adjacent.push(new Array(N + 1).fill(0));
+    }
 
+    for (const r of road) {
+        if (adjacent[r[0]][r[1]] && adjacent[r[0]][r[1]] < r[2]) continue;
+        adjacent[r[0]][r[1]] = r[2];
+        adjacent[r[1]][r[0]] = r[2];
+    }
+
+    const queue = [1];
+    while (queue.length) {
+        const cur = queue.shift();
+        for (const [i, v] of adjacent[cur].entries()) {
+            if (!v) continue;
+            let d = v + distance[cur];
+            if (d < distance[i]) {
+                queue.push(i);
+                distance[i] = d;
+            }
+        }
+    }
+    
+    return distance.filter(v => v <= K).length;
+}
 
 // 문제 설명
 // N개의 마을로 이루어진 나라가 있습니다. 이 나라의 각 마을에는 1부터 N까지의 번호가 각각 하나씩 부여되어 있습니다. 각 마을은 양방향으로 통행할 수 있는 도로로 연결되어 있는데, 서로 다른 마을 간에 이동할 때는 이 도로를 지나야 합니다. 도로를 지날 때 걸리는 시간은 도로별로 다릅니다. 현재 1번 마을에 있는 음식점에서 각 마을로 음식 배달을 하려고 합니다. 각 마을로부터 음식 주문을 받으려고 하는데, N개의 마을 중에서 K 시간 이하로 배달이 가능한 마을에서만 주문을 받으려고 합니다. 다음은 N = 5, K = 3인 경우의 예시입니다.
