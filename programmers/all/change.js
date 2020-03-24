@@ -1,3 +1,18 @@
+function solution(n, money) {   
+  const DP = Array(n + 1);
+  
+  for (let i = 0; i <= n; i++){
+      DP[i] = i % money[0] ? 0 : 1; 
+  }
+  
+  for (let i =1; i < money.length;  i++){
+       for(let j = money[i]; j <= n; j++){
+           DP[j] += DP[j - money[i]];
+       }
+  }
+  return DP[n];
+}
+
 // 거스름돈
 // 문제 설명
 // Finn은 편의점에서 야간 아르바이트를 하고 있습니다. 야간에 손님이 너무 없어 심심한 Finn은 손님들께 거스름돈을 n 원을 줄 때 방법의 경우의 수를 구하기로 하였습니다.
