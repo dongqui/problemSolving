@@ -5,6 +5,7 @@ def solution(jobs):
     wait = []
     time = 0
     nums = len(jobs)
+    jobs.sort()
     while jobs or wait:
         while jobs and jobs[0][0] <= time:
             job = jobs.pop(0)
