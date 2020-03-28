@@ -4,7 +4,6 @@ def solution(jobs):
     total_time = 0
     wait = []
     time = 0
-    a = 0
     nums = len(jobs)
     while jobs or wait:
         while jobs and jobs[0][0] <= time:
