@@ -1,3 +1,60 @@
+
+var SignMaster = function() {
+  this.prices = null;
+};
+
+SignMaster.prototype.changePrices = function(prices) {
+this.prices = prices;
+};
+
+SignMaster.prototype.estimatePrice = function(oldSign, newSign) {
+if (!this.prices) return 0;
+const dp = [];
+for (let i = 0; i <= oldSign.length; i++) {
+  dp.push(new Array(newSign.length + 1).fill(0));
+}
+let maxi = 0;
+for (let i = 1; i <= oldSign.length; i++) {
+  for (let j = 1; j <= newSign.length; j++) {
+    if (newSign[j - 1] === oldSign[i - 1]) {
+      dp[i][j] += dp[i - 1][j - 1] + 1;
+    } else {
+       dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
+    }
+  }
+}
+
+let commonCount = dp[oldSign.length][newSign.length];
+let addCost = oldSign.length - commonCount > 0 ? this.prices['rem'] * (oldSign.length - commonCount) : 0;
+let remCost = newSign.length - commonCount > 0 ? this.prices['add'] * (newSign.length - commonCount) : 0;
+
+return addCost + remCost;
+};
+
+const s = new SignMaster();
+console.log(s.estimatePrice('totes','toes'));
+
+// var SignMaster = function() {
+//   this.add = 0;
+//   this.rem = 0;
+//   this.cache = {};
+// };
+
+// SignMaster.prototype.changePrices = function(prices) {
+//   Object.assign(this, prices);
+// };
+
+// SignMaster.prototype.estimatePrice = function(oldSign, newSign, a = 0, b = 0) {
+//   if(this.cache[oldSign + "/" + newSign]) return this.cache[oldSign + "/" + newSign];
+//   if(this.add === 0 && this.rem === 0) return 0;
+//   if(oldSign === newSign) return 0;
+//  if(oldSign.length === 0) return newSign.length * this.add;
+//  if(newSign.length === 0) return oldSign.length * this.rem;
+//   this.cache[oldSign + "/" + newSign] = Math.min(this.estimatePrice(oldSign.slice(0, -1), newSign) + this.rem,
+//      this.estimatePrice(oldSign, newSign.slice(0, -1)) + this.add,
+//       this.estimatePrice(oldSign.slice(0, -1), newSign.slice(0, -1)) + (this.rem + this.add) * !(oldSign[oldSign.length - 1] === newSign[newSign.length - 1]));
+//   return this.cache[oldSign + "/" + newSign];
+// };
 // Overview
 // You need to help Bob be a good businessman and not charge people too much for his signs.
 
