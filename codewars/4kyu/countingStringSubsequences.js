@@ -4,11 +4,12 @@ function countSubsequences(a,b) {
   for (let i=0;i<=b.length;i++) board[i][0]=1
   for (let i=1;i<=b.length;i++){
     for (let j=1;j<=a.length;j++) board[i][j] = board[i-1][j] + board[i-1][j-1] * (a[j-1]==b[i-1]?1:0)
+    console.log(board)
   }
   return board[b.length][a.length]
 }
 
-countSubsequences("happy birthday", "appyh appy birth day")
+console.log(countSubsequences("happy", "appyh appyy"));
 
 // With your birthday coming up soon, your eccentric friend sent you a message to say "happy birthday":
 
