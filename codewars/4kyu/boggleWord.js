@@ -12,7 +12,6 @@ function checkWord( board, word ) {
     board[i][j] = '';
     for (let [ a, b ] of [[i+1, j],[i-1, j],[i, j+1],[i, j-1],[i+1, j+1],[i-1, j+1],[i+1, j-1],[i-1, j-1]]) {
       if (check(a, b, word.slice(1))) {
-        board[i][j] = s;
         return true;
       }
     }
@@ -20,7 +19,14 @@ function checkWord( board, word ) {
     return false;
   }
 }
+var testBoard = [
+  ["E","A","R","A"],
+  ["N","L","E","C"],
+  ["I","A","I","S"],
+  ["B","Y","O","R"]
+];
 
+console.log(checkWord(testBoard, 'as'));
 // Write a function that determines whether a string is a valid guess in a Boggle board, as per the rules of Boggle. A Boggle board is a 2D array of individual characters, e.g.:
 
 // [ ["I","L","A","W"],
