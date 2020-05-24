@@ -4,18 +4,19 @@
 function solution(A) {
   const event = [];
   for (const [ i, v ] of A.entries()) {
-      event.push([i - v, 1]);
-      event.push([i + v, -1]);
+      event.push([i - v, -1]);
+      event.push([i + v, 1]);
   }
-  event.sort((a, b) => a[0] - b[0]);
+  event.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
   
   let intersection = 0;
   let intervals = 0;
 
   for (const e of event) {
-      if (e[1] === -1) {
+      if (e[1] === 1) {
           intervals -= 1;
-      } else {
+      }
+      if (e[1] === -1) {
           intersection += intervals;
           intervals += 1;
       }
