@@ -19,6 +19,7 @@ const calc = (op, num1, num2) => {
 }
 
 const solution = expression => {
+  expression.split(/([\*\+-])/g); // 정규식도 스플릿이 되네?
   const numbers = expression.match(/[0-9]+/g)
   const operators = expression.match(/\W/g)
 
