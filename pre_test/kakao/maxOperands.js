@@ -43,3 +43,5 @@ const solution = expression => {
 
   return cases.sort((a, b) => b - a)[0]
 }
+
+console.log(perm([1,2,3,4], 0, []));
