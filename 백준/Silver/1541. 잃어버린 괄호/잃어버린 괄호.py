@@ -1,13 +1,6 @@
 a = input()
 
-
-def remove_zero(num_str):
-    while num_str[0] == '0':
-        num_str = num_str[1:]
-    return num_str
-
-
-arr = list(map(remove_zero, a.split('-')))
+arr = a.split('-')
 
 s = 0
 for n in arr[1:]:
