@@ -1,3 +1,4 @@
+# https://www.youtube.com/watch?v=1VNWJTbE2pM 
 import sys
 input = sys.stdin.readline
 
