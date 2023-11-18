@@ -1,35 +1,41 @@
+import sys
+
+input = sys.stdin.readline
+
 N = int(input())
+board = []
+for y in range(N):
+    board.append(list(map(int, input().split(' '))))
 
-paper = [list(map(int, input().split())) for _ in range(N)]
-
-
-def check(x, y, n):
-    for _y in range(y, y + n):
-        for _x in range(x, x + n):
-            if paper[y][x] != paper[_y][_x]:
-                return False
-    return True
-
-
-white = 0
-blue = 0
+count_0 = 0
+count_1 = 0
 
 
 def recur(x, y, n):
-    global white
-    global blue
-    if n == 1 or check(x, y, n):
-        if paper[y][x] == 0:
-            white += 1
-        else:
-            blue += 1
+    global count_0
+    global count_1
+    result = check(x, y, n)
+    if result == 0:
+        count_0 += 1
+    elif result == 1:
+        count_1 += 1
     else:
-        for _y in range(y, y + n, int(n / 2)):
-            for _x in range(x, x + n, int(n / 2)):
-                recur(_x, _y, int(n / 2))
+        next_n = int(n / 2)
+        recur(x, y, next_n)
+        recur(x + next_n, y, next_n)
+        recur(x, y + next_n, next_n)
+        recur(x + next_n, y + next_n, next_n)
+
+
+def check(x, y, n):
+    value = board[y][x]
+    for _y in range(y, y + n):
+        for _x in range(x, x + n):
+            if value != board[_y][_x]:
+                return None
+    return value
 
 
 recur(0, 0, N)
-
-print(white)
-print(blue)
+print(count_0)
+print(count_1)
