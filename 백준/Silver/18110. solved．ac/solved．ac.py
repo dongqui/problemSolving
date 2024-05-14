@@ -6,7 +6,7 @@ def roundUp(num):
     else:
         return int(num)
 
-n = int(sys.stdin.readline().rstrip())
+n = int(sys.stdin.readline())
 
 if n == 0:
     print(0)
@@ -14,7 +14,7 @@ else:
     arr = []
     
     for i in range(n):
-        arr.append(int(sys.stdin.readline().rstrip()))
+        arr.append(int(sys.stdin.readline()))
         
     arr.sort()
     border = roundUp(n * 0.15)
